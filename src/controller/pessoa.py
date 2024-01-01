@@ -17,7 +17,7 @@ def busca_pessoa(service=ServicePessoa):
 
     if not pessoa_retorno:
         return Response(
-            response=json.dumps(f"Pessoa não encontrada. ID {id_pessoa}"),
+            response=json.dumps(f"Pessoa nao encontrada. ID {id_pessoa}"),
             status=404,
             mimetype='application/json'
         )
