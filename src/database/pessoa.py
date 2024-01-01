@@ -1,5 +1,5 @@
 import mysql.connector
-from model.pessoa import Pessoa
+from src.model.pessoa import Pessoa
 
 mydb = mysql.connector.connect(
   host="localhost",
@@ -13,7 +13,7 @@ mycursor = mydb.cursor(dictionary=True)
 class ConectaPessoa():
     '''Classe de conexao com o banco de dados para uma pessoa'''
 
-    def BuscaPessoa(self, id_pessoa) -> Pessoa:
+    def BuscaPessoa(id_pessoa) -> Pessoa:
         '''Metodo que busca a pessoa no banco de dados'''
 
         mycursor.execute("SELECT * FROM cadastro_pessoa.pessoa"

@@ -1,12 +1,10 @@
-from model.pessoa import Pessoa
-from database.pessoa import ConectaPessoa
+from src.model.pessoa import Pessoa
+from src.database.pessoa import ConectaPessoa
 
 
 class ServicePessoa():
     '''Classe que define as funcionalidades de cadastro de uma pessoa'''
 
-    def BuscaPessoa(self, id_pessoa) -> Pessoa:
+    def BuscaPessoa(id_pessoa, conecta=ConectaPessoa) -> Pessoa:
         '''Servico que busca pessoa pelo Id'''
-        database = ConectaPessoa()
-
-        return database.BuscaPessoa(id_pessoa)
+        return conecta.BuscaPessoa(id_pessoa)
