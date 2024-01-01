@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 @dataclass
 class Endereco:
-    '''Classe que define um Endereco'''
+    '''Classe que define os atributos de um Endereco'''
     id_endereco: str
     id_pessoa: str
     nome_logradouro: str

@@ -25,8 +25,8 @@ class ConectaPessoa():
 
         for linha in linhas:
             pessoa = Pessoa(linha["ID_PES"],
-                            linha["NUM_DOCM_PES"],
                             linha["NOM_PES"],
+                            linha["NUM_DOCM_PES"],
                             linha["NUM_IDAE_PES"])
 
         return pessoa
