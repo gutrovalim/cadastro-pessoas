@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class Pessoa:
+class Pessoa():
     '''Classe que define os atributos de uma Pessoa'''
     id_pessoa: str
     nome_pessoa: str

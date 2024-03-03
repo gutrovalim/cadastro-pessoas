@@ -1,10 +1,21 @@
-from flask import Flask
-from src.controller.pessoa import pessoa
+from fastapi import FastAPI
+from src.controller.pessoa import PessoaRouter
+from src.service.pessoa import ServicePessoa
+from src.service.pessoa import ConectaPessoa
 
-app = Flask(__name__)
-app.register_blueprint(pessoa)
+app = FastAPI()
 
+# Database
+conecta_pessoa = ConectaPessoa()
 
-if __name__ == "__main__":
-    app.debug = True
-    app.run(host="0.0.0.0")
+# Service
+service_pessoa = ServicePessoa(conecta_pessoa)
+
+# Controller
+pessoa_router = PessoaRouter(service_pessoa)
+
+app.include_router(
+    pessoa_router.define_routes(),
+    prefix="/api/pessoa",
+    tags=["pessoa"]
+)
