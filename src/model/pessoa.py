@@ -1,8 +1,7 @@
-from dataclasses import dataclass
+from pydantic import BaseModel
 
 
-@dataclass
-class Pessoa():
+class Pessoa(BaseModel):
     '''Classe que define os atributos de uma Pessoa'''
     id_pessoa: str
     nome_pessoa: str

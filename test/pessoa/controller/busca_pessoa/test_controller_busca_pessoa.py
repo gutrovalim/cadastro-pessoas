@@ -1,6 +1,9 @@
 
-from fastapi import FastAPI
+from fastapi import FastAPI, status
+from fastapi.responses import JSONResponse
+from fastapi.encoders import jsonable_encoder
 from fastapi.testclient import TestClient
+from src.model.pessoa import Pessoa
 from src.controller.pessoa import PessoaRouter
 
 
@@ -18,15 +21,16 @@ def test_busca_pessoa_200(mock_service_pessoa_200):
     client = client_test(router)
     response = client.get("/api/pessoa/busca", params={"id_pessoa": "1"})
 
-    assert response.status_code == 200
+    expected_data = Pessoa(id_pessoa="1",
+                           nome_pessoa="John Doe",
+                           numero_documento_pessoa="123",
+                           numero_idade_pessoa=30)
 
-    expected_data = {
-        "id_pessoa": "1",
-        "nome_pessoa": "John Doe",
-        "numero_documento_pessoa": "123",
-        "numero_idade_pessoa": 30
-    }
-    assert response.json() == expected_data
+    expected_response = JSONResponse(content=jsonable_encoder(expected_data),
+                                     status_code=status.HTTP_200_OK)
+
+    assert response.status_code == 200
+    assert response.content == expected_response.body
 
 
 def test_busca_pessoa_404(mock_service_pessoa_404):
