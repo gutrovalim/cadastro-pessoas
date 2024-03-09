@@ -19,15 +19,14 @@ class ConectaPessoa():
 
         self.mycursor.execute("SELECT * FROM cadastro_pessoa.pessoa"
                               f" WHERE ID_PES = '{id_pessoa}'")
-        linhas = self.mycursor.fetchall()
+        query_result = self.mycursor.fetchone()
 
-        if not linhas:
+        if not query_result:
             return None
 
-        for linha in linhas:
-            pessoa = Pessoa(linha["ID_PES"],
-                            linha["NOM_PES"],
-                            linha["NUM_DOCM_PES"],
-                            linha["NUM_IDAE_PES"])
+        pessoa = Pessoa(id_pessoa=query_result["ID_PES"],
+                        nome_pessoa=query_result["NOM_PES"],
+                        numero_documento_pessoa=query_result["NUM_DOCM_PES"],
+                        numero_idade_pessoa=query_result["NUM_IDAE_PES"])
 
         return pessoa
