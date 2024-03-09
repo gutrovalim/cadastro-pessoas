@@ -1,6 +1,8 @@
 import mysql.connector
 from src.model.pessoa import Pessoa
 
+QUERY_BUSCA_PESSOA = "SELECT * FROM cadastro_pessoa.pessoa WHERE ID_PES ="
+
 
 class ConectaPessoa():
     '''Classe de conexao com o banco de dados para uma pessoa'''
@@ -17,8 +19,8 @@ class ConectaPessoa():
     def BuscaPessoa(self, id_pessoa) -> Pessoa:
         '''Metodo que busca a pessoa no banco de dados'''
 
-        self.mycursor.execute("SELECT * FROM cadastro_pessoa.pessoa"
-                              f" WHERE ID_PES = '{id_pessoa}'")
+        self.mycursor.execute(f"{QUERY_BUSCA_PESSOA}"
+                              f" '{id_pessoa}'")
         query_result = self.mycursor.fetchone()
 
         if not query_result:
